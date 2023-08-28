@@ -4,22 +4,38 @@ import Heading from "./component/Heading";
 import ContactList from "./component/ContactsList";
 import AddContact from "./component/AddContact";
 
-async function fetchContact() {
-  fetch("https://jsonplaceholder.typicode.com/users")
-    .then((response) => response.json())
-    .then((jsonData) => console.log(jsonData));
+function fetchContact(contact) {
+  // fetch("https://jsonplaceholder.typicode.com/users")
+  //   .then((response) => response.json())
+  //   .then((jsonData) => setContacts(jsonData));
+  // console.log("contats :", contact);
 }
 function App() {
   const [heading, setHeading] = useState("My Contact List");
+  const [contacts, setContacts] = useState([]);
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
 
-  useEffect(() => fetchContact, []);
+      .then((data) => {
+        const formattedData = data.map((user) => ({
+          id: user.id,
+          name: user.name,
+          phone: user.phone,
+        }));
+        setContacts(formattedData);
+      })
 
+      .catch((err) => console.error(err));
+  }, []);
+  useEffect(() => console.log("contacts :", contacts), []);
   return (
     <div className="App">
       <Heading heading={heading} />
-      <ContactList />
+      <ContactList contacts={contacts}/>
       <AddContact />
-      {/* <button onClick={fetchContact}>view Contact</button> */}
+      {/* {console.log("contacts :", contacts)} */}
+      {/* <button onClick={() => fetchContact(contacts)}>view Contact</button> */}
     </div>
   );
 }
