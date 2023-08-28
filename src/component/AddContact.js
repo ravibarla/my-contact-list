@@ -1,4 +1,10 @@
 const AddContact = (props) => {
-  return <h1>AddContact</h1>;
+  return (
+    <div>
+      <input placeholder="enter name :" />
+      <input placeholder="enter phone :" />
+      <button>Add</button>
+    </div>
+  );
 };
 export default AddContact;
