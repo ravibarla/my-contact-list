@@ -1,10 +1,15 @@
-
-import './App.css';
-
+import { useState } from "react";
+import "./App.css";
+import Heading from "./component/Heading";
+import ContactList from "./component/ContactsList";
+import AddContact from "./component/AddContact";
 function App() {
+  const [heading,setHeading] = useState("My Contact List");
   return (
     <div className="App">
-<h1>hello</h1>
+      <Heading heading={heading} />
+      <ContactList />
+      <AddContact />
     </div>
   );
 }
