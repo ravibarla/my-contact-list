@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap.css"
+import "bootstrap/dist/css/bootstrap.css";
 const ContactList = (props) => {
   // console.log(props);
   const { contacts } = props;
