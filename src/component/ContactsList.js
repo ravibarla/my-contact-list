@@ -14,12 +14,12 @@ const ContactList = (props) => {
         <div className="col-4">
           <div className="h-2 fw-bold">Phone</div>
         </div>
-        <div className="col-1">
-          <div className="h-2 fw-bold">Edit</div>
+        <div className="col-2">
+          <div className="h-2 fw-bold">Action</div>
         </div>
-        <div className="col-1">
+        {/* <div className="col-1">
           <div className="h-2 fw-bold">Delete</div>
-        </div>
+        </div> */}
       </div>
       <div style={{ listStyle: "none" }}>
         {contacts.length > 0 &&

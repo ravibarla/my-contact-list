@@ -9,6 +9,7 @@ const UpdateContact = (props) => {
   }, [editableContactId]);
   const handleForm = (e) => {
     e.preventDefault();
+    //input validation
     handleUpdateContact({ id: editableContactId, name, phone });
   };
   return (

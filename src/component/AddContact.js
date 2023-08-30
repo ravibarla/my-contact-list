@@ -6,6 +6,7 @@ const AddContact = (props) => {
 
   const handleForm = (e) => {
     e.preventDefault();
+    //input validation
     handleAddContact({ name, phone });
   };
   return (
