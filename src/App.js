@@ -11,7 +11,6 @@ function App() {
   const [contacts, setContacts] = useState([]);
   const [isEditable, setEditable] = useState(false);
   const [editableContactId, setEditatableContactId] = useState("");
-
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -25,7 +24,7 @@ function App() {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "light",
+      theme: "colored",
     });
   };
 
@@ -64,16 +63,16 @@ function App() {
   };
 
   //setEditingEnvironment
-  const setEditingEnvironment = (id) => {
+  const setEditingEnvironment = (user) => {
     callToast("You can Update Now");
-    setEditatableContactId(id);
+    setEditatableContactId(user);
     setEditable(true);
   };
   //update contact
   const updateContact = async (updatedContact) => {
     try {
       await fetch(
-        `https://jsonplaceholder.typicode.com/users/${editableContactId}`,
+        `https://jsonplaceholder.typicode.com/users/${editableContactId.id}`,
         {
           method: "PUT",
           body: JSON.stringify(updatedContact),
@@ -85,7 +84,7 @@ function App() {
 
       setContacts(
         contacts.map((contact) =>
-          contact.id === editableContactId
+          contact.id === editableContactId.id
             ? {
                 ...contact,
                 name: updatedContact.name,

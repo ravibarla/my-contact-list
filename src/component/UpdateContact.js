@@ -10,11 +10,11 @@ const UpdateContact = (props) => {
   return (
     <form onSubmit={(e) => handleForm(e)}>
       <input
-        placeholder="enter name :"
+        placeholder={editableContactId.name}
         onChange={(e) => setName(e.target.value)}
       />
       <input
-        placeholder="enter phone :"
+        placeholder={editableContactId.name}
         onChange={(e) => setPhone(e.target.value)}
       />
       <button className="bg-secondary">UPDATE</button>

@@ -30,7 +30,7 @@ const ContactList = (props) => {
               <div className=" border col-4">{data.phone}</div>
               <button
                 onClick={() => {
-                  setEditingEnvironment(data.id);
+                  setEditingEnvironment(data);
                 }}
                 className="border bg-warning col-1"
               >
