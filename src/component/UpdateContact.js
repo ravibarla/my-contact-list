@@ -15,7 +15,7 @@ const UpdateContact = (props) => {
     <form onSubmit={(e) => handleForm(e)}>
       <input placeholder={name} onChange={(e) => setName(e.target.value)} />
       <input placeholder={phone} onChange={(e) => setPhone(e.target.value)} />
-      <button className="bg-secondary">UPDATE</button>
+      <button className="bg-secondary">Update</button>
     </form>
   );
 };

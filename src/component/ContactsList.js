@@ -34,14 +34,14 @@ const ContactList = (props) => {
                 }}
                 className="border bg-warning col-1"
               >
-                edit
+                Edit
               </button>
 
               <button
                 onClick={() => handleDeleteContact(data.id)}
                 className="border bg-danger col-1"
               >
-                delete
+                Delete
               </button>
 
               <div></div>
