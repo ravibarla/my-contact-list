@@ -17,7 +17,7 @@ const UpdateContact = (props) => {
         placeholder="enter phone :"
         onChange={(e) => setPhone(e.target.value)}
       />
-      <button>UPDATE</button>
+      <button className="bg-secondary">UPDATE</button>
     </form>
   );
 };

@@ -13,12 +13,14 @@ const AddContact = (props) => {
       <input
         placeholder="enter name :"
         onChange={(e) => setName(e.target.value)}
+        className="form-control-md"
       />
       <input
         placeholder="enter phone :"
         onChange={(e) => setPhone(e.target.value)}
+        className="form-control-md"
       />
-      <button>Add</button>
+      <button className="bg-primary">Add</button>
     </form>
   );
 };
