@@ -1,6 +1,6 @@
 import { useState } from "react";
 const AddContact = (props) => {
-  const { handleAddContact, contacts } = props;
+  const { handleAddContact } = props;
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 

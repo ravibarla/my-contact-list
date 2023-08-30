@@ -4,6 +4,8 @@ import Heading from "./component/Heading";
 import ContactList from "./component/ContactsList";
 import AddContact from "./component/AddContact";
 import UpdateContact from "./component/UpdateContact";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   const [heading] = useState("My Contact List");
   const [contacts, setContacts] = useState([]);
@@ -13,6 +15,19 @@ function App() {
   useEffect(() => {
     fetchUsers();
   }, []);
+  //call toast
+  const callToast = (text) => {
+    toast.info(`🦄${text}`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   //fetch all users
   const fetchUsers = async () => {
@@ -45,11 +60,13 @@ function App() {
     } catch (err) {
       console.log("error :", err);
     }
+    callToast("added succesfully");
   };
 
   //setEditingEnvironment
-  const setEditingEnvironment = (user) => {
-    setEditatableContactId(user.id);
+  const setEditingEnvironment = (id) => {
+    callToast("You can Update Now");
+    setEditatableContactId(id);
     setEditable(true);
   };
   //update contact
@@ -80,6 +97,7 @@ function App() {
     } catch (err) {
       console.log("error :", err);
     }
+    callToast("updated successfully:");
     setEditatableContactId(null);
     setEditable(false);
   };
@@ -94,25 +112,30 @@ function App() {
     } catch (err) {
       console.log("error :", err);
     }
+    callToast("deleted successfully");
   };
   return (
-    <div className="App">
-      <Heading heading={heading} />
-      <ContactList
-        contacts={contacts}
-        handleDeleteContact={deleteContact}
-        handleUpdateContact={updateContact}
-        setEditingEnvironment={setEditingEnvironment}
-      />
-      {isEditable ? (
-        <UpdateContact
-          editableContactId={editableContactId}
+    <>
+      <ToastContainer />
+      <div className="App">
+        <Heading heading={heading} />
+        <ContactList
+          contacts={contacts}
+          handleDeleteContact={deleteContact}
           handleUpdateContact={updateContact}
+          setEditingEnvironment={setEditingEnvironment}
+          callToast={callToast}
         />
-      ) : (
-        <AddContact handleAddContact={addContact} contacts={contacts} />
-      )}
-    </div>
+        {isEditable ? (
+          <UpdateContact
+            editableContactId={editableContactId}
+            handleUpdateContact={updateContact}
+          />
+        ) : (
+          <AddContact handleAddContact={addContact} contacts={contacts} />
+        )}
+      </div>
+    </>
   );
 }
 
