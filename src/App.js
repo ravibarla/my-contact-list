@@ -4,43 +4,88 @@ import Heading from "./component/Heading";
 import ContactList from "./component/ContactsList";
 import AddContact from "./component/AddContact";
 
-// function fetchContact(contact) {
-// fetch("https://jsonplaceholder.typicode.com/users")
-//   .then((response) => response.json())
-//   .then((jsonData) => setContacts(jsonData));
-// console.log("contats :", contact);
-// }
 function App() {
   const [heading] = useState("My Contact List");
   const [contacts, setContacts] = useState([]);
+  // const [newContact, setNewContact] = useState({ name: "", phone: "" });
+
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-
-      .then((data) => {
-        const formattedData = data.map((user) => ({
-          id: user.id,
-          name: user.name,
-          phone: user.phone,
-        }));
-        setContacts(formattedData);
-      })
-
-      .catch((err) => console.error(err));
+    fetchUsers();
   }, []);
-  function addNewContact(newUser, e) {
-    // console.log("newUser :", newUser);
-   
-    setContacts((prevContact) => [...prevContact, newUser]);
-    e.preventDefault();
-  }
+
+  //fetch all users
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+      const users = await response.json();
+      setContacts(users);
+      console.log(contacts);
+    } catch (err) {
+      console.log("error :", err);
+    }
+  };
+
+  //adding contact
+  const addContact = async (newContact) => {
+    try {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users",
+        {
+          method: "POST",
+          body: JSON.stringify(newContact),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      setContacts([...contacts, data]);
+    } catch (err) {
+      console.log("error :", err);
+    }
+  };
+  //update contact
+  const updateContact = async (id, updatedContact) => {
+    try {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users/id",
+        {
+          method: "PUT",
+          body: JSON.stringify(updatedContact),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setContacts(
+        contacts.map((user) =>
+          user.id === id ? { ...contacts, updateContact } : user
+        )
+      );
+    } catch (err) {
+      console.log("error :", err);
+    }
+  };
+  //delete contact
+  const deleteContact = async (id) => {
+    try {
+      await fetch("https://jsonplaceholder.typicode.com/users/id", {
+        method: "DELETE",
+      });
+
+      setContacts(contacts.filter((user) => user.id !== id));
+    } catch (err) {
+      console.log("error :", err);
+    }
+  };
   return (
     <div className="App">
       <Heading heading={heading} />
-      <ContactList contacts={contacts} />
-      <AddContact handleNewContact={addNewContact} contacts={contacts} />
-      {/* {console.log("contacts :", contacts)} */}
-      {/* <button onClick={() => fetchContact(contacts)}>view Contact</button> */}
+      <ContactList contacts={contacts} handleDeleteContact={deleteContact} />
+      <AddContact handleAddContact={addContact} contacts={contacts} />
+      {/* {console.log(contacts)} */}
     </div>
   );
 }
