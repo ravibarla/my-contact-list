@@ -9,16 +9,16 @@ const ContactList = (props) => {
           <div className="h-2 fw-bold">S.no</div>
         </div>
         <div className="col-4">
-          <div className="h-2 fw-bold">name</div>
+          <div className="h-2 fw-bold">Name</div>
         </div>
         <div className="col-4">
-          <div className="h-2 fw-bold">phone</div>
+          <div className="h-2 fw-bold">Phone</div>
         </div>
         <div className="col-1">
-          <div className="h-2 fw-bold">edit</div>
+          <div className="h-2 fw-bold">Edit</div>
         </div>
         <div className="col-1">
-          <div className="h-2 fw-bold">delete</div>
+          <div className="h-2 fw-bold">Delete</div>
         </div>
       </div>
       <div style={{ listStyle: "none" }}>
