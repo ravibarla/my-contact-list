@@ -3,11 +3,12 @@ import "./App.css";
 import Heading from "./component/Heading";
 import ContactList from "./component/ContactsList";
 import AddContact from "./component/AddContact";
-
+import UpdateContact from "./component/UpdateContact";
 function App() {
   const [heading] = useState("My Contact List");
   const [contacts, setContacts] = useState([]);
-  // const [newContact, setNewContact] = useState({ name: "", phone: "" });
+  const [isEditable, setEditable] = useState(false);
+  const [editableContactId, setEditatableContactId] = useState("");
 
   useEffect(() => {
     fetchUsers();
@@ -21,7 +22,6 @@ function App() {
       );
       const users = await response.json();
       setContacts(users);
-      console.log(contacts);
     } catch (err) {
       console.log("error :", err);
     }
@@ -46,11 +46,17 @@ function App() {
       console.log("error :", err);
     }
   };
+
+  //setEditingEnvironment
+  const setEditingEnvironment = (user) => {
+    setEditatableContactId(user.id);
+    setEditable(true);
+  };
   //update contact
-  const updateContact = async (id, updatedContact) => {
+  const updateContact = async (updatedContact) => {
     try {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users/id",
+      await fetch(
+        `https://jsonplaceholder.typicode.com/users/${editableContactId}`,
         {
           method: "PUT",
           body: JSON.stringify(updatedContact),
@@ -59,14 +65,23 @@ function App() {
           },
         }
       );
+
       setContacts(
-        contacts.map((user) =>
-          user.id === id ? { ...contacts, updateContact } : user
+        contacts.map((contact) =>
+          contact.id === editableContactId
+            ? {
+                ...contact,
+                name: updatedContact.name,
+                phone: updatedContact.phone,
+              }
+            : contact
         )
       );
     } catch (err) {
       console.log("error :", err);
     }
+    setEditatableContactId(null);
+    setEditable(false);
   };
   //delete contact
   const deleteContact = async (id) => {
@@ -83,9 +98,20 @@ function App() {
   return (
     <div className="App">
       <Heading heading={heading} />
-      <ContactList contacts={contacts} handleDeleteContact={deleteContact} />
-      <AddContact handleAddContact={addContact} contacts={contacts} />
-      {/* {console.log(contacts)} */}
+      <ContactList
+        contacts={contacts}
+        handleDeleteContact={deleteContact}
+        handleUpdateContact={updateContact}
+        setEditingEnvironment={setEditingEnvironment}
+      />
+      {isEditable ? (
+        <UpdateContact
+          editableContactId={editableContactId}
+          handleUpdateContact={updateContact}
+        />
+      ) : (
+        <AddContact handleAddContact={addContact} contacts={contacts} />
+      )}
     </div>
   );
 }
