@@ -1,20 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 const ContactList = (props) => {
-  const {
-    contacts,
-    handleDeleteContact,
-    handleUpdateContact,
-    setEditingEnvironment,
-  } = props;
+  const { contacts, handleDeleteContact, setEditingEnvironment } = props;
 
-  // const handleEditButton = () => {
-  //   console.log("edit");
-  //   return (
-  //     <form>
-  //       <input placeholder="update name" />
-  //     </form>
-  //   );
-  // };
   return (
     <div>
       <div style={{ listStyle: "none" }}>
@@ -24,13 +11,9 @@ const ContactList = (props) => {
               <div>{data.name}</div>
               <div>{data.phone}</div>
               <button
-                onClick={() =>
-                  setEditingEnvironment({
-                    name: data.name,
-                    phone: data.phone,
-                    id: data.id,
-                  })
-                }
+                onClick={() => {
+                  setEditingEnvironment(data.id);
+                }}
               >
                 edit
               </button>

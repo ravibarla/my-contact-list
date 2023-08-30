@@ -3,7 +3,6 @@ const UpdateContact = (props) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const { editableContactId, handleUpdateContact } = props;
-  //   console.log("editableContactId :", editableContactId);
   const handleForm = (e) => {
     e.preventDefault();
     handleUpdateContact({ id: editableContactId, name, phone });
