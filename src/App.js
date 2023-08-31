@@ -11,22 +11,51 @@ function App() {
   const [contacts, setContacts] = useState([]);
   const [isEditable, setEditable] = useState(false);
   const [editableContactId, setEditatableContactId] = useState("");
-
   useEffect(() => {
     fetchUsers();
   }, []);
   //call toast
-  const callToast = (text) => {
-    toast.info(`🦄${text}`, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+  const callToast = (text, type = "info") => {
+    switch (type) {
+      case "info":
+        toast.info(`🦄 ${text}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        break;
+      case "warning":
+        toast.warning(`🦄 ${text}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        break;
+      case "success":
+        toast.success(`🦄 ${text}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        break;
+      default:
+        break;
+    }
   };
 
   //fetch all users
@@ -60,20 +89,20 @@ function App() {
     } catch (err) {
       console.log("error :", err);
     }
-    callToast("added succesfully");
+    callToast("added succesfully", "success");
   };
 
   //setEditingEnvironment
-  const setEditingEnvironment = (id) => {
-    callToast("You can Update Now");
-    setEditatableContactId(id);
+  const setEditingEnvironment = (user) => {
+    callToast("You can Update Now", "info");
+    setEditatableContactId(user);
     setEditable(true);
   };
   //update contact
   const updateContact = async (updatedContact) => {
     try {
       await fetch(
-        `https://jsonplaceholder.typicode.com/users/${editableContactId}`,
+        `https://jsonplaceholder.typicode.com/users/${editableContactId.id}`,
         {
           method: "PUT",
           body: JSON.stringify(updatedContact),
@@ -85,7 +114,7 @@ function App() {
 
       setContacts(
         contacts.map((contact) =>
-          contact.id === editableContactId
+          contact.id === editableContactId.id
             ? {
                 ...contact,
                 name: updatedContact.name,
@@ -97,7 +126,7 @@ function App() {
     } catch (err) {
       console.log("error :", err);
     }
-    callToast("updated successfully:");
+    callToast("updated successfully:", "success");
     setEditatableContactId(null);
     setEditable(false);
   };
@@ -112,7 +141,7 @@ function App() {
     } catch (err) {
       console.log("error :", err);
     }
-    callToast("deleted successfully");
+    callToast("deleted successfully", "success");
   };
   return (
     <>
@@ -130,9 +159,14 @@ function App() {
           <UpdateContact
             editableContactId={editableContactId}
             handleUpdateContact={updateContact}
+            callToast={callToast}
           />
         ) : (
-          <AddContact handleAddContact={addContact} contacts={contacts} />
+          <AddContact
+            handleAddContact={addContact}
+            contacts={contacts}
+            callToast={callToast}
+          />
         )}
       </div>
     </>
