@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.css";
+//define contactList
 const ContactList = (props) => {
   const { contacts, handleDeleteContact, setEditingEnvironment } = props;
 
@@ -17,9 +18,6 @@ const ContactList = (props) => {
         <div className="col-2">
           <div className="h-2 fw-bold">Action</div>
         </div>
-        {/* <div className="col-1">
-          <div className="h-2 fw-bold">Delete</div>
-        </div> */}
       </div>
       <div style={{ listStyle: "none" }}>
         {contacts.length > 0 &&
@@ -43,9 +41,6 @@ const ContactList = (props) => {
               >
                 Delete
               </button>
-
-              <div></div>
-              {/* <div className="border 2px solid white"></div> */}
             </div>
           ))}
       </div>
