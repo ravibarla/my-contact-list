@@ -68,3 +68,29 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+#### `App Description :-` 
+
+This is a react app named "My-Contact-List" to display and perform varous CRUD operations.
+
+### `Functionlaity :-` 
+
+1. Create a new contact
+2. Remove a contact
+3. Update a contact
+4. Display list of contacts
+
+### `live Deployment :-`
+
+link
+
+### `App is built using :-`
+
+1. React
+2. Bootstrap
+
+
+### `External Resource :-`
+
+1. https://jsonplaceholder.typicode.com/users
