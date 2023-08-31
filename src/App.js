@@ -6,6 +6,7 @@ import AddContact from "./component/AddContact";
 import UpdateContact from "./component/UpdateContact";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+//define the App
 function App() {
   const [heading] = useState("My Contact List");
   const [contacts, setContacts] = useState([]);
@@ -14,7 +15,8 @@ function App() {
   useEffect(() => {
     fetchUsers();
   }, []);
-  //call toast
+
+  //define toast
   const callToast = (text, type = "info") => {
     switch (type) {
       case "info":
