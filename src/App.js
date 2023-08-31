@@ -18,11 +18,43 @@ function App() {
   const callToast = (text, type = "info") => {
     switch (type) {
       case "info":
+        toast.info(`🦄 ${text}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         break;
       case "warning":
-        break  
+        toast.warning(`🦄 ${text}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        break;
+      case "success":
+        toast.success(`🦄 ${text}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        break;
       default:
-        bread;
+        break;
     }
   };
 
@@ -57,12 +89,12 @@ function App() {
     } catch (err) {
       console.log("error :", err);
     }
-    callToast("added succesfully");
+    callToast("added succesfully", "success");
   };
 
   //setEditingEnvironment
   const setEditingEnvironment = (user) => {
-    callToast("You can Update Now");
+    callToast("You can Update Now", "info");
     setEditatableContactId(user);
     setEditable(true);
   };
@@ -94,7 +126,7 @@ function App() {
     } catch (err) {
       console.log("error :", err);
     }
-    callToast("updated successfully:");
+    callToast("updated successfully:", "success");
     setEditatableContactId(null);
     setEditable(false);
   };
@@ -109,7 +141,7 @@ function App() {
     } catch (err) {
       console.log("error :", err);
     }
-    callToast("deleted successfully");
+    callToast("deleted successfully", "success");
   };
   return (
     <>

@@ -8,11 +8,11 @@ const AddContact = (props) => {
     e.preventDefault();
     //input validation
     if (!name) {
-      callToast("name cannot be empty");
+      callToast("name cannot be empty","warning");
       return;
     }
     if (!phone) {
-      callToast("phone cannot be empty");
+      callToast("phone cannot be empty","warning");
       return;
     }
 
