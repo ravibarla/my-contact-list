@@ -15,17 +15,15 @@ function App() {
     fetchUsers();
   }, []);
   //call toast
-  const callToast = (text) => {
-    toast.info(`🦄${text}`, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
+  const callToast = (text, type = "info") => {
+    switch (type) {
+      case "info":
+        break;
+      case "warning":
+        break  
+      default:
+        bread;
+    }
   };
 
   //fetch all users
@@ -129,9 +127,14 @@ function App() {
           <UpdateContact
             editableContactId={editableContactId}
             handleUpdateContact={updateContact}
+            callToast={callToast}
           />
         ) : (
-          <AddContact handleAddContact={addContact} contacts={contacts} />
+          <AddContact
+            handleAddContact={addContact}
+            contacts={contacts}
+            callToast={callToast}
+          />
         )}
       </div>
     </>

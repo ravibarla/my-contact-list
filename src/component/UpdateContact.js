@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 const UpdateContact = (props) => {
-  const { editableContactId, handleUpdateContact } = props;
+  const { editableContactId, handleUpdateContact, callToast } = props;
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   useEffect(() => {
@@ -10,6 +10,14 @@ const UpdateContact = (props) => {
   const handleForm = (e) => {
     e.preventDefault();
     //input validation
+    if (!name) {
+      callToast("name cannot be empty");
+      return;
+    }
+    if (!phone) {
+      callToast("phone cannot be empty");
+      return;
+    }
     handleUpdateContact({ id: editableContactId, name, phone });
   };
   return (
