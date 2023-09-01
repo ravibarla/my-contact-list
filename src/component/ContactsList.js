@@ -21,9 +21,9 @@ const ContactList = (props) => {
       </div>
       <div style={{ listStyle: "none" }}>
         {contacts.length > 0 &&
-          contacts.map((data) => (
+          contacts.map((data, id) => (
             <div className="d-flex flex-row mb-3 justify-content-center row">
-              <div className=" border col-2">{data.id}</div>
+              <div className=" border col-2">{id}</div>
               <div className=" border col-4">{data.name}</div>
               <div className=" border col-4">{data.phone}</div>
               <button
